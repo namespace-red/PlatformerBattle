@@ -22,7 +22,6 @@ public class PlayerAnimationsController : MonoBehaviour
         _mover.Jumping += OnJumping;
         _mover.Falling += OnFalling;
         _groundChecker.Grounded += OnGrounded;
-        // _attacker.Attacked += OnAttacked;
     }
 
     private void OnDisable()
@@ -30,7 +29,6 @@ public class PlayerAnimationsController : MonoBehaviour
         _mover.Jumping += OnJumping;
         _mover.Falling += OnFalling;
         _groundChecker.Grounded += OnGrounded;
-        // _attacker.Attacked -= OnAttacked;
     }
 
     private void OnJumping() 
