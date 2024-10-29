@@ -13,8 +13,10 @@ public class PlayerAnimationsController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         
-        if (_mover == null) throw new NullReferenceException(nameof(_mover));
-        if (_groundChecker == null) throw new NullReferenceException(nameof(_groundChecker));
+        if (_mover == null) 
+            throw new NullReferenceException(nameof(_mover));
+        if (_groundChecker == null) 
+            throw new NullReferenceException(nameof(_groundChecker));
     }
 
     private void OnEnable()

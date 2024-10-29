@@ -10,7 +10,8 @@ public class Mushroom : MonoBehaviour
 
     private void Awake()
     {
-        if (_animations == null) throw new NullReferenceException(nameof(_animations));
+        if (_animations == null) 
+            throw new NullReferenceException(nameof(_animations));
         
         _mover = GetComponent<HorizontalMoverByPoints>();
     }
