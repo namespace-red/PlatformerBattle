@@ -1,13 +1,27 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Spawner : MonoBehaviour
+public class MoneySpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private float _coolDown;
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] private Money _prefab;
     [SerializeField] private Transform _pool;
-    
+
+    private void Awake()
+    {
+        if (_spawnPoints.Length == 0)
+            throw new NullReferenceException(name +  " SpawnPoints is empty");
+        
+        if (_prefab == null) 
+            throw new NullReferenceException(nameof(_prefab));
+        
+        if (_pool == null) 
+            throw new NullReferenceException(nameof(_pool));
+    }
+
     private void OnEnable()
     {
         StartCoroutine(Run());
