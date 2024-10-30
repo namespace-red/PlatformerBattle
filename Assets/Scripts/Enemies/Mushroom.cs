@@ -1,23 +1,20 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(HorizontalMoverByPoints))]
+[RequireComponent(typeof(HorizontalRotater2D))]
 public class Mushroom : MonoBehaviour
 {
-    [SerializeField] private MushroomAnimationsController _animations;
-    
     private HorizontalMoverByPoints _mover;
+    private HorizontalRotater2D _rotater;
 
     private void Awake()
     {
-        if (_animations == null) 
-            throw new NullReferenceException(nameof(_animations));
-        
         _mover = GetComponent<HorizontalMoverByPoints>();
+        _rotater = GetComponent<HorizontalRotater2D>();
     }
 
     private void FixedUpdate()
     {
-        _animations.SetMoveSpeed(Math.Abs(_mover.HorizontalDirection));
+        _rotater.Rotate(_mover.HorizontalDirection);
     }
 }

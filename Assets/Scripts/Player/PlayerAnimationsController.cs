@@ -4,33 +4,44 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimationsController : MonoBehaviour
 {
-    [SerializeField] private PhysicsMover2D _mover;
-    [SerializeField] private GroundChecker _groundChecker;
-
+    [SerializeField] private PlayerMover _playerMover;
+    
     private Animator _animator;
+    private HorizontalPhysicsMover2D _mover;
+    private Jumper2D _jumper;
+    private GroundDetector2D _groundDetector;
+    private FallDetector2D _fallDetector;
 
     private void Awake()
     {
+        if (_playerMover == null) 
+            throw new NullReferenceException(nameof(_playerMover));
+        
         _animator = GetComponent<Animator>();
         
-        if (_mover == null) 
-            throw new NullReferenceException(nameof(_mover));
-        if (_groundChecker == null) 
-            throw new NullReferenceException(nameof(_groundChecker));
+        _mover = _playerMover.Mover;
+        _jumper = _playerMover.Jumper;
+        _groundDetector = _playerMover.GroundDetector;
+        _fallDetector = _playerMover.FallDetector;
     }
 
     private void OnEnable()
     {
-        _mover.Jumping += OnJumping;
-        _mover.Falling += OnFalling;
-        _groundChecker.Grounded += OnGrounded;
+        _jumper.Jumping += OnJumping;
+        _fallDetector.Falling += OnFalling;
+        _groundDetector.Grounded += OnGrounded;
     }
 
     private void OnDisable()
     {
-        _mover.Jumping += OnJumping;
-        _mover.Falling += OnFalling;
-        _groundChecker.Grounded += OnGrounded;
+        _jumper.Jumping += OnJumping;
+        _fallDetector.Falling += OnFalling;
+        _groundDetector.Grounded += OnGrounded;
+    }
+
+    private void FixedUpdate()
+    {
+        SetMoveSpeed(Math.Abs(_mover.HorizontalVelocity));
     }
 
     private void OnJumping() 
@@ -48,7 +59,7 @@ public class PlayerAnimationsController : MonoBehaviour
         _animator.SetBool(Params.IsFalling, false);
     }
     
-    public void SetMoveSpeed(float speed) 
+    private void SetMoveSpeed(float speed) 
         => _animator.SetFloat(Params.Speed, speed);
     
     private static class Params
