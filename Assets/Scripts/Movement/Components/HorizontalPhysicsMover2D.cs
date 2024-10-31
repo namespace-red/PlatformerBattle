@@ -9,7 +9,7 @@ public class HorizontalPhysicsMover2D : MonoBehaviour
     public Rigidbody2D Rigidbody2D { get; protected set; }
     public float HorizontalVelocity => MathF.Round(Rigidbody2D.velocity.x);
 
-    private void Awake()
+    protected void Awake()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
     }

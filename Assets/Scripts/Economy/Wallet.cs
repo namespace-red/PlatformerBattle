@@ -3,15 +3,13 @@ using UnityEngine;
 
 public class Wallet : MonoBehaviour
 {
-    [SerializeField] private int _value;
-
-    public int Value => _value;
+    [field:SerializeField] public int Value;
 
     public void AddMoney(int value)
     {
         if (value < 0)
             throw new ArgumentOutOfRangeException();
         
-        _value += value;
+        Value += value;
     }
 }

@@ -17,7 +17,7 @@ public class HorizontalMoverByPoints : HorizontalPhysicsMover2D
         if (_wayPoints.Length == 0)
             throw new NullReferenceException(name +  " WayPoints is empty");
         
-        Rigidbody2D = GetComponent<Rigidbody2D>();
+        base.Awake();
     }
   
     private void FixedUpdate()

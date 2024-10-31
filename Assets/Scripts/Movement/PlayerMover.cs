@@ -59,10 +59,10 @@ public class PlayerMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _animationsController.SetRunState(_mover.HorizontalVelocity != 0);
+        _animationsController.SetRunState(_horizontalDirection != 0);
         
         if ((_horizontalDirection != 0f) && 
-            (_groundDetector.IsGrounding || _canControlledInAir))
+            (_canControlledInAir || _groundDetector.IsGrounding))
         {
             _rotater.Rotate(_horizontalDirection);
             _mover.Move(_horizontalDirection);
