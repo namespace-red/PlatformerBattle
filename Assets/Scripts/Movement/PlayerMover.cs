@@ -10,29 +10,45 @@ public class PlayerMover : MonoBehaviour
     private const string Horizontal = nameof(Horizontal);
     private const string Jump = nameof(Jump);
     
+    [SerializeField] private PlayerAnimationsController _animationsController;
     [SerializeField] private GroundDetector2D _groundDetector;
     [SerializeField] private bool _canControlledInAir;
     
     private float _horizontalDirection;
     private bool _isJumped;
+    private HorizontalPhysicsMover2D _mover;
     private HorizontalRotater2D _rotater;
-    
-    public HorizontalPhysicsMover2D Mover { get; private set; }
-    public Jumper2D Jumper { get; private set; }
-    public GroundDetector2D GroundDetector => _groundDetector;
-    public FallDetector2D FallDetector { get; private set; }
+    private Jumper2D _jumper;
+    private FallDetector2D _fallDetector;
 
     private void Awake()
     {
+        if (_animationsController == null) 
+            throw new NullReferenceException(nameof(_animationsController));
+        
         if (_groundDetector == null) 
             throw new NullReferenceException(nameof(_groundDetector));
         
-        Mover = GetComponent<HorizontalPhysicsMover2D>();
+        _mover = GetComponent<HorizontalPhysicsMover2D>();
         _rotater = GetComponent<HorizontalRotater2D>();
-        Jumper = GetComponent<Jumper2D>();
-        FallDetector = GetComponent<FallDetector2D>();
+        _jumper = GetComponent<Jumper2D>();
+        _fallDetector = GetComponent<FallDetector2D>();
+    }
+
+    private void OnEnable()
+    {
+        _jumper.Jumping += _animationsController.PlayJump;
+        _fallDetector.Falling += _animationsController.PlayFall;
+        _groundDetector.Grounded += _animationsController.OnGrounded;
     }
     
+    private void OnDisable()
+    {
+        _jumper.Jumping -= _animationsController.PlayJump;
+        _fallDetector.Falling -= _animationsController.PlayFall;
+        _groundDetector.Grounded -= _animationsController.OnGrounded;
+    }
+
     private void Update()
     {
         _horizontalDirection = Input.GetAxis(Horizontal);
@@ -43,16 +59,18 @@ public class PlayerMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _animationsController.SetRunState(_mover.HorizontalVelocity != 0);
+        
         if ((_horizontalDirection != 0f) && 
             (_groundDetector.IsGrounding || _canControlledInAir))
         {
             _rotater.Rotate(_horizontalDirection);
-            Mover.Move(_horizontalDirection);
+            _mover.Move(_horizontalDirection);
         }
         
         if (_isJumped && _groundDetector.IsGrounding)
         {
-            Jumper.Jump();
+            _jumper.Jump();
         }
         
         _isJumped = false;
