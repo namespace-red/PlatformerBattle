@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(HorizontalRotater2D))]
 [RequireComponent(typeof(Jumper2D))]
 [RequireComponent(typeof(FallDetector2D))]
+[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Wallet))]
 [RequireComponent(typeof(CollisionDetector))]
 public class Player : MonoBehaviour
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     private FallDetector2D _fallDetector;
     private bool _isJumped;
     
+    public Health Health { get; private set; }
     public Wallet Wallet { get; private set; }
 
     private void Awake()
@@ -37,6 +39,8 @@ public class Player : MonoBehaviour
         _rotater = GetComponent<HorizontalRotater2D>();
         _jumper = GetComponent<Jumper2D>();
         _fallDetector = GetComponent<FallDetector2D>();
+        
+        Health = GetComponent<Health>();
         Wallet = GetComponent<Wallet>();
     }
     

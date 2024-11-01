@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3822775249163480683}
   - component: {fileID: 7286026047125211962}
   - component: {fileID: 7474601107643620528}
-  - component: {fileID: 5752667897150085000}
-  - component: {fileID: 9121783101984599061}
-  - component: {fileID: 8756074692713794940}
+  - component: {fileID: -3431216961032363534}
+  - component: {fileID: 840617530948452759}
+  - component: {fileID: 8816848519911271494}
+  - component: {fileID: -403523529099549677}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Untagged
@@ -109,19 +110,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5752667897150085000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6322913467493200405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b40c801a11a411e42bac4c6312e8816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9121783101984599061
+--- !u!114 &-3431216961032363534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2
   _wayPoints: []
---- !u!114 &8756074692713794940
+--- !u!114 &840617530948452759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,6 +136,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e546e9de3aea004588da58f01fe9075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8816848519911271494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6322913467493200405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c3671dc2c3bf04492316146eaaae4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxValue: 1
+  _value: 1
+--- !u!114 &-403523529099549677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6322913467493200405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40c801a11a411e42bac4c6312e8816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationsController: {fileID: 2308944816878354598}
 --- !u!1 &6343167514095129043
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,4 +282,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63e5a899251e6a4db4cc943a1e89ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mushroom: {fileID: 5752667897150085000}

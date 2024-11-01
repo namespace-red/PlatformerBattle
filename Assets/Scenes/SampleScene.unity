@@ -3179,6 +3179,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3431216961032363534, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
+      propertyPath: _wayPoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3431216961032363534, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
+      propertyPath: _wayPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1498132917}
+    - target: {fileID: -3431216961032363534, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
+      propertyPath: _wayPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 517814773}
     - target: {fileID: 3822775249163480683, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.35
@@ -3219,10 +3231,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5752667897150085000, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
-      propertyPath: _animationsController
-      value: 
-      objectReference: {fileID: 1604801668}
     - target: {fileID: 6322913467493200405, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
       propertyPath: m_Name
       value: Mushroom
@@ -3231,22 +3239,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9121783101984599061, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
-      propertyPath: _pointParent
-      value: 
-      objectReference: {fileID: 2132226491}
-    - target: {fileID: 9121783101984599061, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
-      propertyPath: _wayPoints.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121783101984599061, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
-      propertyPath: _wayPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1498132917}
-    - target: {fileID: 9121783101984599061, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
-      propertyPath: _wayPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 517814773}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3294,17 +3286,6 @@ MonoBehaviour:
   _coolDown: 7
   _prefab: {fileID: 4874811595824404594, guid: 57825a5ba6c08594d8708c7d676f5f16, type: 3}
   _pool: {fileID: 473199889}
---- !u!114 &1604801668 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2308944816878354598, guid: 807ba5195c192404a9db7c64f46f4894, type: 3}
-  m_PrefabInstance: {fileID: 1017112384}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63e5a899251e6a4db4cc943a1e89ed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1718456189
 GameObject:
   m_ObjectHideFlags: 0
@@ -3564,11 +3545,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1598785361}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2132226491 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1458416414805453648, guid: 0b806ff801daf924797d99db761da1f6, type: 3}
-  m_PrefabInstance: {fileID: 2796004938530889409}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2141259422
 GameObject:
   m_ObjectHideFlags: 0
