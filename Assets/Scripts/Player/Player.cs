@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Jumper2D))]
 [RequireComponent(typeof(FallDetector2D))]
 [RequireComponent(typeof(Wallet))]
+[RequireComponent(typeof(CollisionDetector))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerAnimationsController _animationsController;
@@ -17,8 +18,9 @@ public class Player : MonoBehaviour
     private HorizontalRotater2D _rotater;
     private Jumper2D _jumper;
     private FallDetector2D _fallDetector;
-    private Wallet _wallet;
     private bool _isJumped;
+    
+    public Wallet Wallet { get; private set; }
 
     private void Awake()
     {
@@ -35,7 +37,7 @@ public class Player : MonoBehaviour
         _rotater = GetComponent<HorizontalRotater2D>();
         _jumper = GetComponent<Jumper2D>();
         _fallDetector = GetComponent<FallDetector2D>();
-        _wallet = GetComponent<Wallet>();
+        Wallet = GetComponent<Wallet>();
     }
     
     private void OnEnable()
@@ -73,23 +75,6 @@ public class Player : MonoBehaviour
         _isJumped = false;
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out IPickable pickated))
-        {
-            switch (pickated)
-            {
-                case Money money:
-                    _wallet.AddMoney(money.Value);
-                    money.PickUp();
-                    break;
-
-                default:
-                    throw new ArgumentException($"Not correct type {pickated}");
-            }
-        }
-    }
-
     private void OnJumpPressed()
     {
         _isJumped = true;
