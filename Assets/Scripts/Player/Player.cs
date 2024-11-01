@@ -56,14 +56,14 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _animationsController.SetRunState(_userInput.HorizontalInput != 0);
-        
         if ((_userInput.HorizontalInput != 0f) && 
             (_canControlledInAir || _groundDetector.IsGrounding))
         {
             _rotater.Rotate(_userInput.HorizontalInput);
             _mover.Move(_userInput.HorizontalInput);
         }
+        
+        _animationsController.SetRunState(_mover.HorizontalVelocity != 0);
         
         if (_isJumped && _groundDetector.IsGrounding)
         {
