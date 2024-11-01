@@ -12,7 +12,7 @@ public class UserInput : MonoBehaviour
     
     private void Update()
     {
-        HorizontalInput = Input.GetAxis(Horizontal);
+        HorizontalInput = Input.GetAxisRaw(Horizontal);
         
         if (Input.GetButtonDown(Jump))
             JumpPressed?.Invoke();
