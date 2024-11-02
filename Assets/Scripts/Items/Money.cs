@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class Money : MonoBehaviour, IPickable
 {
-    [SerializeField] private int _value = 1;
+    [field:SerializeField] public int Value = 1;
 
-    public int Value => _value;
+    private void OnValidate()
+    {
+        if (Value < 0)
+            Value = 0;
+    }
 
     public void PickUp()
     {
