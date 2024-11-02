@@ -21,6 +21,15 @@ public class CollisionDetector : MonoBehaviour
                     _player.Wallet.AddMoney(money.Value);
                     money.PickUp();
                     break;
+                
+                case FirstAidKit firstAidKit:
+                    if (_player.Health.CanBeHealed)
+                    {
+                        _player.Health.Heal(firstAidKit.HealthValue);
+                        firstAidKit.PickUp();
+                    }
+
+                    break;
 
                 default:
                     throw new ArgumentException($"Not correct type {pickated}");

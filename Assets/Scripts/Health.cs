@@ -23,6 +23,7 @@ public class Health : MonoBehaviour
     }
 
     public bool IsAlive => Value > 0;
+    public bool CanBeHealed => Value < MaxValue;
     
     public void ApplyDamage(float damage)
     {
@@ -32,7 +33,7 @@ public class Health : MonoBehaviour
         Value -= damage;
     }
 
-    public void Healing(float value)
+    public void Heal(float value)
     {
         if (value < 0)
             throw new ArgumentOutOfRangeException();
@@ -40,8 +41,8 @@ public class Health : MonoBehaviour
         Value += value;
     }
     
-    public void FullHealing()
+    public void HealFull()
     {
-        Value += MaxValue;
+        Value = MaxValue;
     }
 }
