@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3288072242929826456}
   - component: {fileID: 1583950678698966649}
   - component: {fileID: 2897477945948779763}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirstAidKit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
