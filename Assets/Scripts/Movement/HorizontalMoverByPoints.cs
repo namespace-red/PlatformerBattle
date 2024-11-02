@@ -10,7 +10,7 @@ public class HorizontalMoverByPoints : HorizontalPhysicsMover2D
     private int _currentIndex;
 
     public Transform Target => _wayPoints[_currentIndex];
-    public float HorizontalDirection => (Target.position.x - transform.position.x) > 0 ? 1f : -1f;
+    public float HorizontalDirection => MathF.Sign(Target.position.x - transform.position.x);
 
     private void Awake()
     {
