@@ -1,15 +1,15 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-public class SpawnerByPoints<T> : MonoBehaviour where T : Object
+public class SpawnerByPoints<T> : MonoBehaviour where T : MonoBehaviour
 {
-    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private SpawnPoint[] _spawnPoints;
     [SerializeField] private float _coolDown;
     [SerializeField] private T _prefab;
-    [SerializeField] private Transform _pool;
     
     private void Awake()
     {
@@ -18,15 +18,19 @@ public class SpawnerByPoints<T> : MonoBehaviour where T : Object
         
         if (_prefab == null) 
             throw new NullReferenceException(nameof(_prefab));
-        
-        if (_pool == null) 
-            throw new NullReferenceException(nameof(_pool));
     }
 
     private void OnEnable()
     {
         StartCoroutine(Run());
     }
+    
+    private void OnValidate()
+    {
+        if (_coolDown < 0)
+            _coolDown = 0;
+    }
+
 
     private IEnumerator Run()
     {
@@ -34,20 +38,40 @@ public class SpawnerByPoints<T> : MonoBehaviour where T : Object
         
         while (enabled)
         {
-            Create();
+            if (HaveFreeSpawnPoint())
+            {
+                Create();
+            }
+            
             yield return wait;
         }
     }
 
+    private bool HaveFreeSpawnPoint()
+    {
+        return _spawnPoints.Any(spawnPoint => spawnPoint.IsFree);
+    }
+    
     private void Create()
     {
-        Vector3 position = GetSpawnPoint();
-        Instantiate(_prefab, position, Quaternion.identity, _pool);
+        SpawnPoint spawnPoint = GetSpawnPoint();
+        var created = Instantiate(_prefab, spawnPoint.transform);
+        
+        if (created.TryGetComponent(out IPickable pickable))
+        {
+            spawnPoint.Occupy(pickable);
+        }
     }
 
-    private Vector3 GetSpawnPoint()
+    private SpawnPoint GetSpawnPoint()
     {
-        int randomPoint = Random.Range(0, _spawnPoints.Length);
-        return _spawnPoints[randomPoint].position;
+        int randomPoint;
+        
+        do
+        {
+            randomPoint = Random.Range(0, _spawnPoints.Length);
+        } while (_spawnPoints[randomPoint].IsFree == false);
+
+        return _spawnPoints[randomPoint];
     }
 }
