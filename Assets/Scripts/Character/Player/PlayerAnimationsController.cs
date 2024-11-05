@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class PlayerAnimationsController : MonoBehaviour
+public class PlayerAnimationsController : MonoBehaviour, IJumpAnimation, IFallAnimation, IGroundedAnimation, IMoveAnimation
 {
     private Animator _animator;
 
@@ -19,7 +19,7 @@ public class PlayerAnimationsController : MonoBehaviour
     public void OnGrounded()
         => _animator.SetTrigger(State.Grounded);
     
-    public void SetRunState(bool state) 
+    public void SetMoveState(bool state) 
         => _animator.SetBool(Params.IsRunning, state);
     
     private static class Params

@@ -26,6 +26,6 @@ public class Mushroom : MonoBehaviour
     private void FixedUpdate()
     {
         _rotater.Rotate(_patrol.HorizontalDirection);
-        _animationsController.SetWalkState(_patrol.HorizontalDirection != 0);
+        _animationsController.SetMoveState(_patrol.HorizontalDirection != 0);
     }
 }

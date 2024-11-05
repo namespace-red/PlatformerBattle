@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
             _rotater.Rotate(_userInput.HorizontalInput);
         }
 
-        _animationsController.SetRunState(_mover.HorizontalVelocity != 0);
+        _animationsController.SetMoveState(_mover.HorizontalVelocity != 0);
         
         if (_isJumped && _groundDetector.IsGrounding)
         {

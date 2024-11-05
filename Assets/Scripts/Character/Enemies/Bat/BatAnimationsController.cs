@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class BatAnimationsController : MonoBehaviour
+public class BatAnimationsController : MonoBehaviour, IMoveAnimation
 {
     private Animator _animator;
 
@@ -10,8 +10,10 @@ public class BatAnimationsController : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
     
-    public void SetFlyState(bool state) 
-        => _animator.SetBool(Params.IsFlying, state);
+    public void SetMoveState(bool state)
+    {
+        _animator.SetBool(Params.IsFlying, state);
+    }
 
     private static class Params
     {
