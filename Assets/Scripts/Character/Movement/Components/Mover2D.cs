@@ -6,7 +6,6 @@ public class Mover2D : MonoBehaviour
     [SerializeField] private float _speed = 10f;
 
     public Rigidbody2D Rigidbody2D { get; protected set; }
-    public Vector2 Velocity => Rigidbody2D.velocity;
     
     protected void Awake()
     {
