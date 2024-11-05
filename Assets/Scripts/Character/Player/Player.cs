@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(HorizontalPhysicsMover2D))]
+[RequireComponent(typeof(PhysicsMover2D))]
 [RequireComponent(typeof(HorizontalRotater2D))]
 [RequireComponent(typeof(Jumper2D))]
 [RequireComponent(typeof(FallDetector2D))]
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GroundDetector2D _groundDetector;
     [SerializeField] private bool _canControlledInAir;
 
-    private HorizontalPhysicsMover2D _mover;
+    private PhysicsMover2D _mover;
     private HorizontalRotater2D _rotater;
     private Jumper2D _jumper;
     private FallDetector2D _fallDetector;
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         if (_groundDetector == null) 
             throw new NullReferenceException(nameof(_groundDetector));
         
-        _mover = GetComponent<HorizontalPhysicsMover2D>();
+        _mover = GetComponent<PhysicsMover2D>();
         _rotater = GetComponent<HorizontalRotater2D>();
         _jumper = GetComponent<Jumper2D>();
         _fallDetector = GetComponent<FallDetector2D>();
@@ -62,13 +62,16 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ((_userInput.HorizontalInput != 0f) && 
-            (_canControlledInAir || _groundDetector.IsGrounding))
+        if (_canControlledInAir || _groundDetector.IsGrounding)
         {
-            _rotater.Rotate(_userInput.HorizontalInput);
             _mover.Move(_userInput.HorizontalInput);
         }
         
+        if (_userInput.HorizontalInput != 0f)
+        {
+            _rotater.Rotate(_userInput.HorizontalInput);
+        }
+
         _animationsController.SetRunState(_mover.HorizontalVelocity != 0);
         
         if (_isJumped && _groundDetector.IsGrounding)

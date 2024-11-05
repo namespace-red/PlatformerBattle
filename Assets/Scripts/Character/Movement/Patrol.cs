@@ -1,33 +1,35 @@
 using System;
 using UnityEngine;
 
-public class HorizontalMoverByPoints : HorizontalPhysicsMover2D
+[RequireComponent(typeof(Mover2D))]
+public class Patrol : MonoBehaviour
 {
-    private const float PositionInaccuracy = 0.1f;
+    private const float PositionMagnitudeInaccuracy = 0.1f;
     
     [SerializeField] private Transform[] _wayPoints;
     
+    private Mover2D _mover;
     private int _currentIndex;
 
     public Transform Target => _wayPoints[_currentIndex];
-    public float HorizontalDirection => MathF.Sign(Target.position.x - transform.position.x);
-
+    public Vector2 Direction => (Target.position - transform.position).normalized;
+    
     private void Awake()
     {
         if (_wayPoints.Length == 0)
             throw new NullReferenceException(name +  " WayPoints is empty");
-        
-        base.Awake();
-    }
-  
+
+        _mover = GetComponent<Mover2D>();
+    }  
+    
     private void FixedUpdate()
     {
-        if (Mathf.Abs(Target.position.x - transform.position.x) < PositionInaccuracy)
+        if ((Target.position - transform.position).magnitude < PositionMagnitudeInaccuracy)
         {
             SetNextPoint();
         }
 
-        Move(HorizontalDirection);
+        _mover.Move(Direction);
     }
 
     private void SetNextPoint()

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class HorizontalPhysicsMover2D : MonoBehaviour
+public class PhysicsMover2D : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
     

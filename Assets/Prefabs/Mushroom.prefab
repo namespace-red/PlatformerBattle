@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 3822775249163480683}
   - component: {fileID: 7286026047125211962}
   - component: {fileID: 7474601107643620528}
-  - component: {fileID: -3431216961032363534}
-  - component: {fileID: 840617530948452759}
-  - component: {fileID: 8816848519911271494}
-  - component: {fileID: -403523529099549677}
+  - component: {fileID: 6530536580085359766}
+  - component: {fileID: 6866778084904180672}
+  - component: {fileID: 7080452841298862355}
+  - component: {fileID: 7267981250097803696}
+  - component: {fileID: 8242611178794818260}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Untagged
@@ -110,7 +111,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-3431216961032363534
+--- !u!114 &6530536580085359766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,12 +120,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 6322913467493200405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b694822e521d41c4ea60fa6cc237af27, type: 3}
+  m_Script: {fileID: 11500000, guid: d039ba6a281d32244ac3741edb72fdd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
+--- !u!114 &6866778084904180672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6322913467493200405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4c3c053790ab24081b78eca4af7245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _wayPoints: []
---- !u!114 &840617530948452759
+--- !u!114 &7080452841298862355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e546e9de3aea004588da58f01fe9075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8816848519911271494
+--- !u!114 &7267981250097803696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,9 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c3671dc2c3bf04492316146eaaae4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxValue: 1
-  _value: 1
---- !u!114 &-403523529099549677
+  MaxValue: 2
+  _value: 2
+--- !u!114 &8242611178794818260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
