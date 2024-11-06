@@ -4,7 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(Patrol))]
 [RequireComponent(typeof(TargetPursuer))]
 [RequireComponent(typeof(HorizontalRotater2D))]
+[RequireComponent(typeof(EnemyCollisionDetector))]
+[RequireComponent(typeof(Attacker))]
 [RequireComponent(typeof(Health))]
+
 public class Bat : MonoBehaviour
 {
     [SerializeField] private BatAnimationsController _animationsController;
@@ -13,10 +16,11 @@ public class Bat : MonoBehaviour
     private Patrol _patrol;
     private TargetPursuer _targetPursuer;
     private HorizontalRotater2D _rotater;
+    private Attacker _attacker;
     private StateMachine _stateMachine;
     
     public Health Health { get; private set; }
-    
+
     private void Start()
     {
         if (_animationsController == null)
@@ -25,6 +29,7 @@ public class Bat : MonoBehaviour
         _patrol = GetComponent<Patrol>();
         _targetPursuer = GetComponent<TargetPursuer>();
         _rotater = GetComponent<HorizontalRotater2D>();
+        _attacker = GetComponent<Attacker>();
         Health = GetComponent<Health>();
         
         var idleState = new IdleState(_animationsController);

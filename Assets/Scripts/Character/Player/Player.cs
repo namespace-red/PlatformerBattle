@@ -6,8 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Jumper2D))]
 [RequireComponent(typeof(FallDetector2D))]
 [RequireComponent(typeof(Health))]
+[RequireComponent(typeof(Attacker))]
 [RequireComponent(typeof(Wallet))]
-[RequireComponent(typeof(CollisionDetector))]
+[RequireComponent(typeof(PlayerCollisionDetector))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerAnimationsController _animationsController;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     private bool _isJumped;
     
     public Health Health { get; private set; }
+    public Attacker Attacker { get; private set; }
     public Wallet Wallet { get; private set; }
 
     private void Awake()
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
         _fallDetector = GetComponent<FallDetector2D>();
         
         Health = GetComponent<Health>();
+        Attacker = GetComponent<Attacker>();
         Wallet = GetComponent<Wallet>();
     }
     

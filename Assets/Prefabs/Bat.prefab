@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2438729657953937352}
   - component: {fileID: 4097901090317117860}
   - component: {fileID: 4672363739116814918}
+  - component: {fileID: 6798317102335993300}
+  - component: {fileID: 3050231364152945749}
   - component: {fileID: 1022551819240610205}
   m_Layer: 0
   m_Name: Bat
@@ -97,11 +99,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7a0a11683acf24b4d84d0e702110f4fc, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -177,6 +179,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxValue: 1
   _value: 1
+--- !u!114 &6798317102335993300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850437983060876056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d34000715580274c968c164757fa3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 1
+--- !u!114 &3050231364152945749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850437983060876056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0918077ff41fcc641ab19b637944340d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1022551819240610205
 MonoBehaviour:
   m_ObjectHideFlags: 0
