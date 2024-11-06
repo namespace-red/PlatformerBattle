@@ -22,7 +22,7 @@ public class PlayerPursuerState : IState
         foreach (var raycastHit2D in Physics2D.CircleCastAll(_targetPursuer.transform.position, 
             _playerDetectorRadius, Vector2.zero))
         {
-            if (raycastHit2D.rigidbody.TryGetComponent(out Player player))
+            if ((raycastHit2D.rigidbody != null) && (raycastHit2D.rigidbody.TryGetComponent(out Player player)))
             {
                 _targetPursuer.Target = player.transform;
                 break;

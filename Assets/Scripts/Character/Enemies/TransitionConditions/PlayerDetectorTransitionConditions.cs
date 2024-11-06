@@ -14,6 +14,6 @@ public class PlayerDetectorTransitionConditions : ITransitionCondition
     public bool IsDone()
     {
         return Physics2D.CircleCastAll(_detector.position, _radius, Vector2.zero)
-            .Any(raycastHit2D => raycastHit2D.rigidbody.TryGetComponent(out Player player));
+            .Any(raycastHit2D => (raycastHit2D.rigidbody != null) && (raycastHit2D.rigidbody.TryGetComponent(out Player player)));
     }
 }
