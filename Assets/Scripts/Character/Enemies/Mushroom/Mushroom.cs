@@ -8,8 +8,6 @@ using UnityEngine;
 [RequireComponent(typeof(Health))]
 public class Mushroom : MonoBehaviour
 {
-    private const float SecUntilDeath = 2f;
-
     [SerializeField] private MushroomAnimationsController _animationsController;
 
     private PhysicsPatrol _patrol;
@@ -57,7 +55,7 @@ public class Mushroom : MonoBehaviour
     {
         var idleState = new IdleState();
         var patrolState = new PhysicsPatrolState(_animationsController, _patrol, _rotater);
-        var deathState = new DeathState(GetComponent<Collider2D>(), _animationsController, SecUntilDeath);
+        var deathState = new DeathState(GetComponent<Collider2D>(), _animationsController);
         
         var emptyTransitionConditions = new EmptyTransitionConditions();
         var deathTransitionConditions = new DeathTransitionConditions(Health);

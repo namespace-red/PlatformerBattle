@@ -1,18 +1,28 @@
 using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class DeathState : IState
 {
+    private readonly float _throwingForce = 8f;
+    private readonly float _gravityScale = 5f;
+    private readonly float _secUntilDeath = 1f;
+    private readonly float _rotationSpeed = 90f;
+    private readonly float _maxAngle = 45f;
+    
     private readonly Collider2D _collider2D;
     private readonly IDamageableAnimation _animation;
-    private readonly float _secUntilDeath;
+    private readonly Transform _transform;
 
-    public DeathState(Collider2D collider2D, IDamageableAnimation animation, float secUntilDeath)
+    public DeathState(Collider2D collider2D, IDamageableAnimation animation)
     {
         _collider2D = collider2D ?? throw new NullReferenceException(nameof(collider2D));
         _animation = animation ?? throw new NullReferenceException(nameof(animation));
-        _secUntilDeath = secUntilDeath > 0f ? secUntilDeath : throw new ArgumentOutOfRangeException(nameof(secUntilDeath));
+        _transform = _collider2D.transform;
+        
+        int randomMultiplier = Random.Range(0, 2) * 2 - 1;
+        _rotationSpeed *= randomMultiplier;
     }
 
     public void Enter()
@@ -24,8 +34,8 @@ public class DeathState : IState
         if (rigidbody != null)
         {
             rigidbody.isKinematic = false;
-            rigidbody.gravityScale = 1f;
-            rigidbody.freezeRotation = false;
+            rigidbody.AddForce(Vector2.up * _throwingForce, ForceMode2D.Impulse);
+            rigidbody.gravityScale = _gravityScale;
         }
         
         _animation.PlayDeath();
@@ -43,5 +53,7 @@ public class DeathState : IState
 
     public void FixedUpdate()
     {
+        if (Math.Abs(_transform.rotation.z) < _maxAngle)
+            _transform.Rotate(Vector3.forward, _rotationSpeed * Time.fixedDeltaTime);
     }
 }

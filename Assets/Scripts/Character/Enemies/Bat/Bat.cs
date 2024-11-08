@@ -10,8 +10,6 @@ using UnityEngine;
 
 public class Bat : MonoBehaviour
 {
-    private const float SecUntilDeath = 2f;
-    
     [SerializeField] private BatAnimationsController _animationsController;
     [SerializeField] private float _playerDetectorRadius = 5f;
 
@@ -69,7 +67,7 @@ public class Bat : MonoBehaviour
         var idleState = new IdleState();
         var patrolState = new PatrolState(_animationsController, _patrol, _rotater);
         var targetPursuerState = new PlayerPursuerState(_animationsController, _targetPursuer, _rotater, _playerDetectorRadius);
-        var deathState = new DeathState(GetComponent<Collider2D>(), _animationsController, SecUntilDeath);
+        var deathState = new DeathState(GetComponent<Collider2D>(), _animationsController);
         
         var emptyTransitionConditions = new EmptyTransitionConditions();
         var playerDetectorTransitionConditions = new PlayerDetectorTransitionConditions(transform, _playerDetectorRadius);
