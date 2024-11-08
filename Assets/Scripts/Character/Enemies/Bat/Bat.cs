@@ -44,21 +44,8 @@ public class Bat : MonoBehaviour
         Health = GetComponent<Health>();
         
         Health.ValueChanged += OnHealthChanged;
-        
-        var idleState = new IdleState(_animationsController);
-        var patrolState = new PatrolState(_animationsController, _patrol, _rotater);
-        var targetPursuerState = new PlayerPursuerState(_animationsController, _targetPursuer, _rotater, _playerDetectorRadius);
-        var deathState = new DeathState(GetComponent<Collider2D>(), _animationsController, SecUntilDeath);
-        
-        var emptyTransitionConditions = new EmptyTransitionConditions();
-        var playerDetectorTransitionConditions = new PlayerDetectorTransitionConditions(transform, _playerDetectorRadius);
-        var deathTransitionConditions = new DeathTransitionConditions(Health);
-        
-        _stateMachine = new StateMachine();
-        _stateMachine.AddTransition(idleState, patrolState, emptyTransitionConditions);
-        _stateMachine.AddTransition(patrolState, targetPursuerState, playerDetectorTransitionConditions);
-        _stateMachine.AddTransitionFromAnyStates(deathState, deathTransitionConditions);
-        _stateMachine.SetFirstState(idleState);
+
+        InitStateMachine();
     }
 
     private void Update()
@@ -77,6 +64,24 @@ public class Bat : MonoBehaviour
         Gizmos.DrawSphere(transform.position, _playerDetectorRadius);
     }
 
+    private void InitStateMachine()
+    {
+        var idleState = new IdleState();
+        var patrolState = new PatrolState(_animationsController, _patrol, _rotater);
+        var targetPursuerState = new PlayerPursuerState(_animationsController, _targetPursuer, _rotater, _playerDetectorRadius);
+        var deathState = new DeathState(GetComponent<Collider2D>(), _animationsController, SecUntilDeath);
+        
+        var emptyTransitionConditions = new EmptyTransitionConditions();
+        var playerDetectorTransitionConditions = new PlayerDetectorTransitionConditions(transform, _playerDetectorRadius);
+        var deathTransitionConditions = new DeathTransitionConditions(Health);
+        
+        _stateMachine = new StateMachine();
+        _stateMachine.AddTransition(idleState, patrolState, emptyTransitionConditions);
+        _stateMachine.AddTransition(patrolState, targetPursuerState, playerDetectorTransitionConditions);
+        _stateMachine.AddTransitionFromAnyStates(deathState, deathTransitionConditions);
+        _stateMachine.SetFirstState(idleState);
+    }
+    
     private void OnHealthChanged(float value, float maxValue)
     {
         _animationsController.PlayTakeHit();
