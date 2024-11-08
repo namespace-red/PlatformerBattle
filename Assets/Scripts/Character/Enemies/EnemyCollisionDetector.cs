@@ -6,8 +6,10 @@ public class EnemyCollisionDetector : MonoBehaviour
 {
     private const float YNormalAttack = 0f;
 
+    public bool DoesAttackEnemies;
+
     private Attacker _attacker;
-    
+
     private void Awake()
     {
         _attacker = GetComponent<Attacker>();
@@ -17,12 +19,25 @@ public class EnemyCollisionDetector : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Player player))
         {
-            ContactPoint2D contactPoint = other.contacts.First();
-
-            if (contactPoint.normal.y > YNormalAttack)
-                return;
-            
-            _attacker.Attack(player.Health);
+            if (CanAttack(other))
+                Attack(player.Health);
         }
+        else if (DoesAttackEnemies && other.gameObject.TryGetComponent(out Health health))
+        {
+            if (CanAttack(other))
+                Attack(health);
+        }
+    }
+
+    private bool CanAttack(Collision2D other)
+    {
+        ContactPoint2D contactPoint = other.contacts.First();
+
+        return contactPoint.normal.y <= YNormalAttack;
+    }
+    
+    private void Attack(Health health)
+    {
+        _attacker.Attack(health);
     }
 }
