@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Attacker))]
 [RequireComponent(typeof(Health))]
 
-public class Bat : MonoBehaviour
+public class Bat : Enemy
 {
     [SerializeField] private BatAnimationsController _animationsController;
     [SerializeField] private float _playerDetectorRadius = 5f;

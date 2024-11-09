@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyCollisionDetector))]
 [RequireComponent(typeof(Attacker))]
 [RequireComponent(typeof(Health))]
-public class Mushroom : MonoBehaviour
+public class Mushroom : Enemy
 {
     [SerializeField] private MushroomAnimationsController _animationsController;
 
