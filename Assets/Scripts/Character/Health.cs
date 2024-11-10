@@ -7,6 +7,8 @@ public class Health : MonoBehaviour
     [SerializeField] private float _value;
     
     public event Action<float, float> ValueChanged;
+    public event Action ValueDecreased;
+    public event Action ValueIncreased;
     public event Action Died;
     
     private float Value
@@ -31,6 +33,7 @@ public class Health : MonoBehaviour
             throw new ArgumentOutOfRangeException();
 
         Value -= damage;
+        ValueDecreased?.Invoke();
     }
 
     public void Heal(float value)
@@ -39,10 +42,15 @@ public class Health : MonoBehaviour
             throw new ArgumentOutOfRangeException();
 
         Value += value;
+        ValueIncreased?.Invoke();
     }
     
     public void HealFull()
     {
-        Value = MaxValue;
+        if (Value < MaxValue)
+        {
+            Value = MaxValue;
+            ValueIncreased?.Invoke();
+        }
     }
 }

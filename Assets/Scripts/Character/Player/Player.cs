@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         _jumper.Jumping += _animationsController.PlayJump;
         _fallDetector.Falling += _animationsController.PlayFall;
         _groundDetector.Grounded += _animationsController.OnGrounded;
-        Health.ValueChanged += OnHeathChanged;
+        Health.ValueDecreased += OnHeathDecreased;
         Health.Died += OnDied;
     }
     
@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
         _jumper.Jumping -= _animationsController.PlayJump;
         _fallDetector.Falling -= _animationsController.PlayFall;
         _groundDetector.Grounded -= _animationsController.OnGrounded;
-        Health.ValueChanged -= OnHeathChanged;
+        Health.ValueDecreased -= OnHeathDecreased;
         Health.Died -= OnDied;
     }
 
@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         _isJumped = true;
     }
 
-    private void OnHeathChanged(float value, float maxValue)
+    private void OnHeathDecreased()
     {
         _animationsController.PlayTakeHit();
     }
