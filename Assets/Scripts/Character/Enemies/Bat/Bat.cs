@@ -30,8 +30,8 @@ public class Bat : Enemy
     {
         Health.ValueChanged -= OnHealthChanged;
     }
-
-    private void Start()
+    
+    private void Awake()
     {
         if (_animationsController == null)
             throw new NullReferenceException(nameof(_animationsController));
@@ -40,7 +40,10 @@ public class Bat : Enemy
         _targetPursuer = GetComponent<TargetPursuer>();
         _rotater = GetComponent<HorizontalRotater2D>();
         Health = GetComponent<Health>();
-        
+    }
+
+    private void Start()
+    {
         Health.ValueChanged += OnHealthChanged;
 
         InitStateMachine();

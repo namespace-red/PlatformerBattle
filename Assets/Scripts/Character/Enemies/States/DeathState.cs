@@ -21,7 +21,8 @@ public class DeathState : IState
         _animation = animation ?? throw new NullReferenceException(nameof(animation));
         _transform = _collider2D.transform;
         
-        int randomMultiplier = Random.Range(0, 2) * 2 - 1;
+        int zeroOrTwo = Random.Range(0, 2) * 2;
+        int randomMultiplier = zeroOrTwo - 1;
         _rotationSpeed *= randomMultiplier;
     }
 
