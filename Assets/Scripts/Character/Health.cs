@@ -4,26 +4,30 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [field: SerializeField] public float MaxValue;
+    
     [SerializeField] private float _value;
     
+    public event Action<float> ValueChangedPercent;
     public event Action<float, float> ValueChanged;
     public event Action ValueDecreased;
     public event Action ValueIncreased;
     public event Action Died;
     
-    private float Value
+    public float Value
     {
         get => _value;
-        set
+        private set
         {
             _value = Mathf.Clamp(value, 0 , MaxValue);
-            ValueChanged?.Invoke(Value, MaxValue);
+            ValueChangedPercent?.Invoke(PercentValue);
+            ValueChanged?.Invoke(_value, MaxValue);
             
             if (Value == 0)
                 Died?.Invoke();
         }
     }
 
+    public float PercentValue => Value / MaxValue;
     public bool IsAlive => Value > 0;
     public bool CanBeHealed => Value < MaxValue;
     
