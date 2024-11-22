@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0918077ff41fcc641ab19b637944340d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DoesAttackEnemies: 0
+  CanAttackEnemies: 0
 --- !u!114 &1022551819240610205
 MonoBehaviour:
   m_ObjectHideFlags: 0

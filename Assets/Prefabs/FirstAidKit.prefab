@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a82a3e9af2299d3448cb0f0a14f3cbb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthValue: 1
+  <HealthValue>k__BackingField: 1
