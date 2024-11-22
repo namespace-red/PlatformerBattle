@@ -20,17 +20,6 @@ public class Bat : Enemy
     
     public Health Health { get; private set; }
 
-    private void OnEnable()
-    {
-        if (Health != null)
-            Health.ValueChanged += OnHealthChanged;
-    }
-
-    private void OnDisable()
-    {
-        Health.ValueChanged -= OnHealthChanged;
-    }
-    
     private void Awake()
     {
         if (_animationsController == null)
@@ -44,9 +33,20 @@ public class Bat : Enemy
 
     private void Start()
     {
-        Health.ValueChanged += OnHealthChanged;
+        Health.ValueDecreased += OnHealthDecreased;
 
         InitStateMachine();
+    }
+
+    private void OnEnable()
+    {
+        if (Health != null)
+            Health.ValueDecreased += OnHealthDecreased;
+    }
+
+    private void OnDisable()
+    {
+        Health.ValueDecreased -= OnHealthDecreased;
     }
 
     private void Update()
@@ -83,7 +83,7 @@ public class Bat : Enemy
         _stateMachine.SetFirstState(idleState);
     }
     
-    private void OnHealthChanged(float value, float maxValue)
+    private void OnHealthDecreased()
     {
         _animationsController.PlayTakeHit();
     }
