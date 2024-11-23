@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +7,18 @@ public class SmoothBar : SimpleBar
     [SerializeField] private float _fillingSpeed = 1f;
     
     private Coroutine _coroutine;
+
+    public float FillingSpeed
+    {
+        get => _fillingSpeed;
+        set
+        {
+            if (value < 0)
+                throw new ArgumentOutOfRangeException(nameof(FillingSpeed));
+            
+            _fillingSpeed = value;
+        }
+    }
 
     protected void SetValueSmoothly(float value)
     {
