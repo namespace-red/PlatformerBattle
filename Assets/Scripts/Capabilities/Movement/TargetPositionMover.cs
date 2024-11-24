@@ -4,6 +4,7 @@ using UnityEngine;
 public class TargetPositionMover : MonoBehaviour
 {
     [SerializeField] private Transform _target;
+    [SerializeField] private Vector3 _offset;
 
     private void Awake()
     {
@@ -13,6 +14,6 @@ public class TargetPositionMover : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = _target.position;
+        transform.position = _target.position + _offset;
     }
 }

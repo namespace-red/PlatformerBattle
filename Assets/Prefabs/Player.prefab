@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 8944450206500861505}
   - component: {fileID: 7560799500558948749}
   - component: {fileID: 1989613629277785394}
+  - component: {fileID: 1261676770603815977}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -266,6 +267,27 @@ MonoBehaviour:
   _userInput: {fileID: 0}
   _groundDetector: {fileID: 4952415073107693483}
   _canControlledInAir: 1
+--- !u!114 &1261676770603815977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003870295582690178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38dea8ade71fc5c499ce46a313b9a5aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <AbilitySec>k__BackingField: 6
+  <CoolDownSec>k__BackingField: 4
+  _tickSec: 2
+  _healthForTick: 1
+  _radius: 3
+  _offset: {x: 0, y: 0.7, z: 0}
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &4535053602984525322
 GameObject:
   m_ObjectHideFlags: 0
