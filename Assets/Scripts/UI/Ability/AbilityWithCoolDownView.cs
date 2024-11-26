@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 public class AbilityWithCoolDownView : MonoBehaviour
 {
-    [SerializeField] private ImageFiller _activityImageFiller;
+    [SerializeField] protected AbilityWithCoolDown Ability;
+    [SerializeField] private ImageFiller _abilityImageFiller;
     [SerializeField] private ImageFiller _coolDownImageFiller;
     [SerializeField] private Button _button;
-    [SerializeField] private AbilityWithCoolDown _ability;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        if (_activityImageFiller == null)
-            throw new NullReferenceException(nameof(_activityImageFiller));
+        if (_abilityImageFiller == null)
+            throw new NullReferenceException(nameof(_abilityImageFiller));
         
         if (_coolDownImageFiller == null)
             throw new NullReferenceException(nameof(_coolDownImageFiller));
@@ -20,44 +20,44 @@ public class AbilityWithCoolDownView : MonoBehaviour
         if (_button == null)
             throw new NullReferenceException(nameof(_button));
         
-        if (_ability == null)
-            throw new NullReferenceException(nameof(_ability));
+        if (Ability == null)
+            throw new NullReferenceException(nameof(Ability));
     }
 
     private void OnEnable()
     {
         _button.onClick.AddListener(OnButtonClicked);
-        _ability.Ran += OnRan;
-        _ability.Finished += OnFinished;
-        _ability.CooledDown += OnCooledDown;
+        Ability.Ran += OnRan;
+        Ability.Finished += OnFinished;
+        Ability.CooledDown += OnCooledDown;
     }
 
     private void OnDisable()
     {
         _button.onClick.RemoveListener(OnButtonClicked);
-        _ability.Ran -= OnRan;
-        _ability.Finished -= OnFinished;
-        _ability.CooledDown -= OnCooledDown;
+        Ability.Ran -= OnRan;
+        Ability.Finished -= OnFinished;
+        Ability.CooledDown -= OnCooledDown;
+    }
+
+    protected virtual void OnRan()
+    {
+        _abilityImageFiller.StartFilling(Ability.AbilitySec);
+    }
+
+    protected virtual void OnFinished()
+    {
+        _coolDownImageFiller.StartFilling(Ability.CoolDownSec);
+    }
+
+    protected virtual void OnCooledDown()
+    {
+        _coolDownImageFiller.ResetFill();
+        _abilityImageFiller.ResetFill();
     }
 
     private void OnButtonClicked()
     {
-        _ability.TryRun();
-    }
-
-    private void OnRan()
-    {
-        _activityImageFiller.StartFilling(_ability.AbilitySec);
-    }
-    
-    private void OnFinished()
-    {
-        _coolDownImageFiller.StartFilling(_ability.CoolDownSec);
-    }
-
-    private void OnCooledDown()
-    {
-        _coolDownImageFiller.ResetFill();
-        _activityImageFiller.ResetFill();
+        Ability.TryRun();
     }
 }
