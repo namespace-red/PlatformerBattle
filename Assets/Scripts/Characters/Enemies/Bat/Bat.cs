@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(HorizontalRotater2D))]
 [RequireComponent(typeof(EnemyCollisionDetector))]
 [RequireComponent(typeof(Attacker))]
-[RequireComponent(typeof(Health))]
 
 public class Bat : Enemy
 {
@@ -17,18 +16,18 @@ public class Bat : Enemy
     private TargetPursuer _targetPursuer;
     private HorizontalRotater2D _rotater;
     private StateMachine _stateMachine;
-    
-    public Health Health { get; private set; }
 
-    private void Awake()
+
+    protected override void Awake()
     {
         if (_animationsController == null)
             throw new NullReferenceException(nameof(_animationsController));
         
+        base.Awake();
+        
         _patrol = GetComponent<Patrol>();
         _targetPursuer = GetComponent<TargetPursuer>();
         _rotater = GetComponent<HorizontalRotater2D>();
-        Health = GetComponent<Health>();
     }
 
     private void Start()
@@ -62,7 +61,7 @@ public class Bat : Enemy
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, _playerDetectorRadius);
+        Gizmos.DrawWireSphere(transform.position, _playerDetectorRadius);
     }
 
     private void InitStateMachine()

@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(HorizontalRotater2D))]
 [RequireComponent(typeof(EnemyCollisionDetector))]
 [RequireComponent(typeof(Attacker))]
-[RequireComponent(typeof(Health))]
 public class Mushroom : Enemy
 {
     [SerializeField] private MushroomAnimationsController _animationsController;
@@ -13,17 +12,16 @@ public class Mushroom : Enemy
     private PhysicsPatrol _patrol;
     private HorizontalRotater2D _rotater;
     private StateMachine _stateMachine;
-    
-    public Health Health { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
         if (_animationsController == null)
             throw new NullReferenceException(nameof(_animationsController));
         
+        base.Awake();
+        
         _patrol = GetComponent<PhysicsPatrol>();
         _rotater = GetComponent<HorizontalRotater2D>();
-        Health = GetComponent<Health>();
     }
     
     private void Start()

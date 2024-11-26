@@ -1,11 +1,12 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
 {
-    protected Pusher Pusher;
+    public Health Health { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        Pusher = GetComponent<Pusher>();
+        Health = GetComponent<Health>();
     }
 }
