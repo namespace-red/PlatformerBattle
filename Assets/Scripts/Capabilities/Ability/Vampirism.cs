@@ -1,3 +1,4 @@
+using System.Timers;
 using UnityEngine;
 
 [RequireComponent(typeof(Health))]
@@ -10,25 +11,19 @@ public class Vampirism : AbilityWithCoolDown
     [SerializeField] private LayerMask _targetLayer;
 
     private Health _health;
-    private float _tickTimer;
+    private Timer _timer = new Timer();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         _health = GetComponent<Health>();
-        _tickTimer = _tickSec;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + _offset, _radius);
+        _timer.AutoReset = false;
     }
 
     protected override void AbilityLogic()
     {
-        _tickTimer += Time.deltaTime;
-        
-        if (_tickTimer < _tickSec)
+        if (_timer.Enabled)
             return;
         
         foreach (var collider in Physics2D.OverlapCircleAll(transform.position + _offset, _radius, _targetLayer))
@@ -39,8 +34,9 @@ public class Vampirism : AbilityWithCoolDown
                 
                 targetHealth.ApplyDamage(healthValue);
                 _health.Heal(healthValue);
-                
-                _tickTimer = 0;
+
+                _timer.Interval = _tickSec * MsecInSec;
+                _timer.Start();
                 break;
             }
         }
