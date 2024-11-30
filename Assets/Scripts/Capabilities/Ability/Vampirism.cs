@@ -13,6 +13,9 @@ public class Vampirism : AbilityWithCoolDown
     private Health _health;
     private Timer _timer = new Timer();
 
+    public float Radius => _radius;
+    public Vector3 Center => transform.position + _offset;
+
     protected override void Awake()
     {
         base.Awake();
@@ -26,7 +29,7 @@ public class Vampirism : AbilityWithCoolDown
         if (_timer.Enabled)
             return;
         
-        foreach (var collider in Physics2D.OverlapCircleAll(transform.position + _offset, _radius, _targetLayer))
+        foreach (var collider in Physics2D.OverlapCircleAll(Center, _radius, _targetLayer))
         {
             if (collider.TryGetComponent(out Health targetHealth))
             {
